@@ -1,0 +1,146 @@
+body {
+    background: #eee;
+    
+}
+.texto-ficha {
+    padding-left: 2%;
+    padding-right: 4%;
+}
+.table {
+    margin: 0;
+}
+.cursor {
+	cursor: pointer;
+
+}
+.editar, .no-editar {
+    float: right;
+}
+
+.margen-formulario {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.margen-input {
+    margin-bottom: 5px;
+}
+.campos-diag {
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+.paciente {
+    background: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+.paciente {
+    *zoom: 1;
+    -webkit-transition: all 300ms 0ms;
+    -webkit-transition-delay: ease-in;
+    -moz-transition: all 300ms 0ms ease-in;
+    -o-transition: all 300ms 0ms ease-in;
+    transition: all 300ms 0ms ease-in;
+    position: relative;
+    opacity: 1;
+}
+.paciente:before, .paciente:after {
+    content: "";
+    display: table;
+}
+.paciente:after { clear: both }
+.paciente.invisible { opacity: 0 }
+.paciente .upvote {
+    display: block;
+    margin: 7px 12px 0 0;
+    float: left;
+}
+
+.paciente .paciente-content { float: left }
+.paciente .paciente-content h3 {
+    margin: 0;
+    line-height: 1.4;
+    font-size: 18px;
+}
+.paciente-content h3.seleccionado {
+	color: #B94A48;
+	margin-bottom: 26px;
+}
+.paciente .paciente-content h3 a {
+    display: inline-block;
+    margin-right: 5px;
+}
+.paciente .paciente-content h3 span {
+    font-weight: normal;
+    font-size: 14px;
+    display: inline-block;
+    color: #aaaaaa;
+}
+.paciente .paciente-content p { margin: 0 }
+.paciente .discuss {
+    display: block;
+    float: right;
+    margin-top: 7px;
+}
+
+
+
+/*
+.diag-content {
+    background: #eee;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.diag-content {
+    *zoom: 1;
+    -webkit-transition: all 300ms 0ms;
+    -webkit-transition-delay: ease-in;
+    -moz-transition: all 300ms 0ms ease-in;
+    -o-transition: all 300ms 0ms ease-in;
+    transition: all 300ms 0ms ease-in;
+    position: relative;
+    opacity: 1;
+}
+.diag-content:before, .diag-content:after {
+    content: "";
+    display: table;
+}
+.diag-content:after { clear: both }
+.diag-content.invisible { opacity: 0 }
+.diag-content .upvote {
+    display: block;
+    margin: 7px 12px 0 0;
+    float: left;
+}
+.diag-content .diag-content-content { float: left }
+.diag-content .diag-content-content h3 {
+    margin: 0;
+    line-height: 1.4;
+    font-size: 18px;
+}
+.diag-content .diag-content-content h3 a {
+    display: inline-block;
+    margin-right: 5px;
+}
+.diag-content .diag-content-content h3 span {
+    font-weight: normal;
+    font-size: 14px;
+    display: inline-block;
+    color: #aaaaaa;
+}
+.diag-content .diag-content-content p { margin: 0 }
+.diag-content .discuss {
+    display: block;
+    float: right;
+    margin-top: 7px;
+}
+.diag-content .sangrado {
+	margin-left: 25px;
+}
+
+*/

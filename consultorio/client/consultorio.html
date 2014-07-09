@@ -1,0 +1,170 @@
+<head>
+	<title>Consultorio</title>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div id="insert-pane" class="container-fluid">
+			{{> acciones_paciente}}
+		</div>
+		<div id="main-pane" class="container-fluid">
+			{{> lista_pacientes}}
+		</div>
+	</div>
+</body>
+
+<template name="acciones_paciente">
+	<div class="add-paciente container-fluid">
+		<div id="campos-paciente row-fluid">
+			<div class="col-md-5">
+			{{#if add_paciente}}
+			<form class="agregar-paciente margen-formulario">
+				<input id="add-apellido" class="form-control margen-input" placeholder="Apellido..." type="text" />
+				<input id="add-nombre" class="form-control margen-input" placeholder="Nombre..." type="text" />
+				<input id="add-edad" class="form-control margen-input" placeholder="Edad..." type="text" />
+				<input id="add-dni" class="form-control margen-input" placeholder="DNI..." type="text" />
+				<input id="add-direccion" class="form-control margen-input" placeholder="Dirección..." type="text" />
+				<input id="add-telefono" class="form-control margen-input" placeholder="Telefono..." type="text" />
+				<input id="add-obra-social" class="form-control margen-input" placeholder="Obra Social..." type="text" />
+				<input type="submit" value="Agregar" class="btn btn-primary"/>
+			</form>
+			{{else}}
+			<h3>
+				<span class="cursor label label-success" id="btnAddPaciente">
+					&#32;&plus;&#32;&#32;Nuevo Paciente...
+				</span>
+			</h3>
+			{{/if}}			
+			</div>
+			<div class="col-md-6 col-md-offset-1">
+			<form id="buscar">
+			<div class="input-group margen-formulario">
+			  <input id="apellido" type="text" class="form-control">
+			  <span class="input-group-btn">
+			    <button class="btn btn-primary" type="submit">Buscar</button>
+			  </span>
+			</div><!-- /input-group -->
+			</form>	
+			</div><!-- /.col-lg-6 -->
+		</div>
+	</div>
+</template>
+
+<template name="lista_pacientes">
+	{{#each pacientes}}
+		<div class="paciente container-fluid">
+			<div class="paciente-header container-fluid">
+			<div class="row-fluid">
+				<h4 id="{{_id}}" class="{{paciente_status}} col-md-10">
+					{{apellido}}&#44;&#32;{{nombre}}
+				</h4>
+				{{#if edicion_activada}}
+				<h4 class="col-md-2">
+					<span class="cursor no-editar label label-primary">&#x25B2;
+					</span>
+				</h4>	
+				{{else}}
+				<h4 class="col-md-2">
+					<span class="cursor editar label label-primary">&#x25BC;
+					</span>
+				</h4>	
+				{{/if}}	
+			</div>	
+			</div>
+
+			<div class="diagnosticos-content container-fluid">
+				{{#if edicion_activada}}
+					{{> detalles_del_paciente}}
+				{{/if}}	
+			</div>	
+				
+			
+		</div>
+	{{/each}}
+</template>
+
+<template name="detalles_del_paciente">
+	<div class="container-fluid">
+		<div class="row-fluid diagnosticos-header">
+			<div class="col-md-6 diagnostico-nuevo col-md-offset-2">
+			{{#if add_diagnostico}}
+			
+				<form class="campos-agregar-diagnostico">
+					<input id="add-descripcion" class="form-control margen-input" placeholder="Descripcion..." type="text" />
+					<input id="add-medico-derivante" class="form-control margen-input" placeholder="Medico derivante..." type="text" />
+					<input id="add-tratamiento" class="form-control margen-input" placeholder="Tratamiento..." type="text" />
+					<input id="add-observacion" class="form-control margen-input" placeholder="Observación..." type="text" />
+					<input type="submit" value="Agregar" class="btn btn-primary margen-input"/>
+				</form>	
+			
+			{{else}}
+			<h3 class="margen-formulario">
+				<span class="cursor label label-success" id="btnAddDiagnostico">
+					&#32;&plus;&#32;&#32;Nuevo Diagnostico...
+				</span>
+			</h3>
+			{{/if}}
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		{{#each diagnosticos}}
+		<div class="row-fluid">
+		<div class="col-md-offset-2 col-md-8">
+		
+			<div class="diagnostico panel panel-primary">
+				<div class="panel-heading">
+					
+					<table class="table">
+					<tr>
+					  <td><strong>Nombre:  </strong>{{paciente.apellido}}&#44;&#32;{{paciente.nombre}}</td>
+					  <td><strong>DNI:  </strong>{{paciente.dni}}</td>
+					</tr>
+					 
+					<tr>
+					  <td><strong>Edad:  </strong>{{paciente.edad}}</td>
+					  <td><strong>Domicilio:  </strong>{{paciente.direccion}}</td>
+					</tr>
+					 
+					<tr>
+					  <td><strong>Telefono:  </strong>{{paciente.telefono}}</td>
+					  <td><strong>Obra Social:  </strong>{{paciente.obra_social}}</td>
+					</tr>
+					</table>	
+					
+				</div>
+				<div class="panel-body">
+
+					<p class="bg-success campos-diag clearfix"> 
+						<u><strong>Medico derivante:</strong></u> 
+						<p class="texto-ficha">{{medico_derivante}}</p>
+					</p>
+
+					<p class="bg-success campos-diag clearfix"> 
+						<u><strong>Diagnostico:</strong></u> <strong class="pull-right">16/07/2014</strong>
+						<p class="texto-ficha">{{descripcion_diag}}</p>
+					</p>
+
+					<p class="bg-success campos-diag clearfix"> 
+						<u><strong>Tratamiento:</strong></u> <strong class="pull-right">16/07/2014</strong>
+						{{#if editar_tratamiento}}
+						<input id="editar-tratamiento" class="form-control margen-input" value="{{tratamiento}}" type="text" />
+						{{else}}
+						<p class="texto-ficha">{{tratamiento}}</p>
+						<span class="cursor pull-right label label-success btnEditarTratamiento">Editar</span>
+						{{/if}}
+					</p>
+
+					<p class="bg-success campos-diag clearfix"> 
+						<u><strong>Observaciones:</strong></u>
+						<p class="texto-ficha">{{observacion}}</p>
+					</p>
+
+				</div>
+			</div>
+
+		</div>
+		</div>	
+		{{/each}}
+	</div>	
+</template>
