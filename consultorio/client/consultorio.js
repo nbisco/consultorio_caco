@@ -97,7 +97,7 @@ Template.lista_pacientes.helpers({
 
 
 
-Session.set('editar_tratamiento', false);
+Session.set('editar_tratamiento', null);
 //TEMPLATE DETALLES_DEL_PACIENTE....
 Template.detalles_del_paciente.helpers({
 	diagnosticos: function () {
@@ -111,7 +111,7 @@ Template.detalles_del_paciente.helpers({
 		return paciente;
 	},
 	editar_tratamiento: function () {
-		return	Session.equals('editar_tratamiento', true);
+		return	Session.equals('editar_tratamiento', this._id);
 	},
 });
 	//EVENTS...
@@ -136,8 +136,7 @@ Template.detalles_del_paciente.helpers({
 			Session.set('agregando_diagnostico', false);
 		},
 		'click .btnEditarTratamiento' : function(e, t) {
-			Session.set('editar_tratamiento', true);
-			Session.set('tratamiento_actual', this._id);
+			Session.set('editar_tratamiento', this._id);
 			Meteor.flush();
 			focusText(t.find('#editar-tratamiento'));
 		},
@@ -145,10 +144,11 @@ Template.detalles_del_paciente.helpers({
 		if (e.which === 13) {
 			var tratVal = String(e.target.value || '');
 			if (tratVal) {
-				Diagnosticos.update({_id:Session.get('tratamiento_actual')}, 
+				diagnostico_id = Session.get('editar_tratamiento');
+				Diagnosticos.update({_id:diagnostico_id}, 
 					{$set: {tratamiento:tratVal}});
 			}
-			Session.set('editar_tratamiento', false);
+			Session.set('editar_tratamiento', null);
 			}
 		},
 	});	
